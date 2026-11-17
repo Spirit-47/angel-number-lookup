@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel Number Lookup Engine - Meanings and Significance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Angel Number Lookup Engine",
+      "url": "https://example.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://example.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold mb-3 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">Angel Number Lookup Engine</h1>
+            <p class="text-slate-400">Discover the hidden spiritual meanings and messages behind the numbers you keep seeing.</p>
+        </header>
+
+        <div class="bg-slate-800 p-6 rounded-xl shadow-lg mb-8 border border-slate-700">
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="searchInput" placeholder="Enter a number (e.g., 111, 222, 777)..." class="flex-grow bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500 text-slate-100">
+                <button onclick="lookupNumber()" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg transition">Search</button>
+            </div>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <span class="text-xs text-slate-400 self-center mr-2">Popular:</span>
+                <button onclick="quickSearch('111')" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1 rounded-full">111</button>
+                <button onclick="quickSearch('222')" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1 rounded-full">222</button>
+                <button onclick="quickSearch('333')" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1 rounded-full">333</button>
+                <button onclick="quickSearch('444')" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1 rounded-full">444</button>
+                <button onclick="quickSearch('777')" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1 rounded-full">777</button>
+                <button onclick="quickSearch('888')" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1 rounded-full">888</button>
+            </div>
+        </div>
+
+        <div id="resultContainer" class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700 mb-8 hidden">
+            <h2 id="resultTitle" class="text-2xl font-bold text-purple-400 mb-3"></h2>
+            <p id="resultDescription" class="text-slate-300 leading-relaxed"></p>
+        </div>
+
+        <div class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700">
+            <h3 class="text-xl font-semibold mb-4 text-slate-200">User Testimonials</h3>
+            <div id="testimonialList" class="space-y-3 mb-4"></div>
+            <div class="flex gap-2">
+                <input type="text" id="testimonialInput" placeholder="Leave a review or experience..." class="flex-grow bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-purple-500">
+                <button onclick="addTestimonial()" class="bg-slate-700 hover:bg-slate-600 text-sm font-semibold px-4 py-2 rounded-lg transition">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-6 text-xs text-slate-500 border-t border-slate-800">
+        &copy; 2026 Angel Number Lookup Engine. All rights reserved.
+    </footer>
+
+    <script>
+        const database = {
+            "111": "Seeing 111 is a powerful sign of manifestation and alignment. Your thoughts are quickly turning into reality, so focus on positive outcomes.",
+            "222": "Number 222 represents balance, trust, and alignment. Everything is working out as it is supposed to for your highest good.",
+            "333": "333 signifies mind, body, and spirit alignment. The ascended masters are near you, offering support and guidance.",
+            "444": "Seeing 444 means you are surrounded by guardian angels. It is a message of protection, encouragement, and inner strength.",
+            "555": "Number 555 indicates that major life changes are coming your way. Embrace these shifts with an open and adaptable mindset.",
+            "666": "666 encourages you to refocus your thoughts away from material concerns and toward spiritual growth and inner peace.",
+            "777": "777 is a divine sign of luck and spiritual mastery. You are on the right path and miracles are unfolding in your life.",
+            "888": "Number 888 symbolizes financial abundance, infinity, and karma. Your hard work is about to pay off abundantly.",
+            "999": "999 marks the completion of a major phase in your life. A new door is about to open as you release the past."
+        };
+
+        function lookupNumber() {
+            const query = document.getElementById('searchInput').value.trim();
+            const container = document.getElementById('resultContainer');
+            const title = document.getElementById('resultTitle');
+            const desc = document.getElementById('resultDescription');
+
+            if (database[query]) {
+                title.textContent = "Angel Number " + query;
+                desc.textContent = database[query];
+                container.classList.remove('hidden');
+            } else {
+                title.textContent = "Number " + query;
+                desc.textContent = "This number carries unique universal frequencies. While not a traditional core angel number, it encourages you to trust your intuition and look for synchronicity around you.";
+                container.classList.remove('hidden');
+            }
+        }
+
+        function quickSearch(num) {
+            document.getElementById('searchInput').value = num;
+            lookupNumber();
+        }
+
+        function loadTestimonials() {
+            const list = document.getElementById('testimonialList');
+            const saved = JSON.parse(localStorage.getItem('angel_testimonials')) || [
+                "This tool helped me understand why I keep seeing 111 everywhere!",
+                "Accurate and very clean layout. Love the design."
+            ];
+            list.innerHTML = "";
+            saved.forEach(t => {
+                const div = document.createElement('div');
+                div.className = "bg-slate-900 p-3 rounded-lg text-sm text-slate-300 border border-slate-700/50";
+                div.textContent = t;
+                list.appendChild(div);
+            });
+        }
+
+        function addTestimonial() {
+            const input = document.getElementById('testimonialInput');
+            const text = input.value.trim();
+            if (!text) return;
+            const saved = JSON.parse(localStorage.getItem('angel_testimonials')) || [];
+            saved.unshift(text);
+            localStorage.setItem('angel_testimonials', JSON.stringify(saved));
+            input.value = "";
+            loadTestimonials();
+        }
+
+        window.onload = loadTestimonials;
+    </script>
+</body>
+</html>
